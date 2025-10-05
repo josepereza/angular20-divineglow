@@ -1,0 +1,26 @@
+.price {
+  font-size: 2.5rem;
+  font-weight: 300;
+  color: #333;
+}
+
+.btn-primary {
+    padding: 15px 30px;
+    font-size: 1.2rem;
+    transition: all 0.3s ease;
+}
+
+.btn-primary:disabled {
+    background-color: #198754; /* Color verde de éxito de Bootstrap */
+    border-color: #198754;
+}
+
+   @media (max-width: 768px) {
+      .description {
+        font-size: 0.8rem;
+      }
+      img{
+        max-width: 80%;
+        margin-right:auto;
+      }
+    }

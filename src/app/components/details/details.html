@@ -1,0 +1,42 @@
+<div class="container text-white my-5 ">
+<br><br>
+  <!-- 
+    Nueva sintaxis @if/@else.
+    - @if (product(); as productItem) comprueba si el signal 'product' tiene valor.
+    - Si es así, crea un alias local llamado 'productItem' que podemos usar de forma segura
+      dentro del bloque, eliminando la necesidad de 'product()!'.
+  -->
+  @if (product(); as productItem) {
+    
+    <div class="row">
+      <div class="col-md-3 m-auto">
+        <img [src]="productItem.imageUrl" class="img-fluid rounded shadow-lg" [alt]="productItem.name" style="object-fit: cover;">
+      </div>
+      <div class="col-md-6 d-flex flex-column justify-content-center">
+        <h1 class="display-4">{{ productItem.name }}</h1>
+        <p class="lead description">{{ productItem.description }}</p>
+        <p class="price text-white">{{ productItem.price | currency:'CHF' }}</p>
+        <div class="mt-4">
+          <button class="btn btn-primary btn-lg" (click)="addItemToCart()" [disabled]="addedToCart()">
+
+            <!-- También actualizamos el botón a la nueva sintaxis -->
+            @if (!addedToCart()) {
+              <span>
+                <i class="bi bi-cart-plus"></i> In den Warenkorb
+              </span>
+            } @else {
+              <span>
+                Hinzugefügt! <i class="bi bi-check-lg"></i>
+              </span>
+            }
+
+          </button>
+        </div>
+      </div>
+    </div>
+  } @else {
+    <!-- El bloque @else se muestra cuando la condición @if es falsa -->
+    <p class="text-center">Produkt nicht gefunden. <a routerLink="/products">Zurück zur Kollektion</a>.</p>
+  }
+
+</div>
