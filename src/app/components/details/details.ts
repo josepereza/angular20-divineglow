@@ -1,10 +1,11 @@
-import { Component, inject, input, signal } from '@angular/core';
+import { Component, computed, effect, inject, input, signal } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { CartService } from '../../services/cart';
 import { ProductoService } from '../../services/product';
 import { Product } from '../../interfaces/product';
 import { CommonModule, CurrencyPipe } from '@angular/common';
 import { map, switchMap } from 'rxjs';
+import { toSignal } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-details',
@@ -13,7 +14,7 @@ import { map, switchMap } from 'rxjs';
   styleUrl: './details.css'
 })
 export class Details {
-// Inyección de dependencias moderna
+/* // Inyección de dependencias moderna
   private route = inject(ActivatedRoute);
   private productService = inject(ProductoService);
   cartService = inject(CartService);
@@ -45,7 +46,29 @@ export class Details {
       this.product.set(foundProduct);
     });
   }
+ */
 
+   // ✅ 1. Input signal para recibir el ID del producto (desde la ruta o un padre)
+  id = input.required<number>();
+ cartService=inject(CartService)
+   private productService = inject(ProductoService);
+ // Signal para el feedback visual al añadir al carrito.
+  addedToCart = signal(false);
+  // ✅ 2. Convertimos el observable de productos a una señal reactiva
+  products = toSignal(this.productService.getProducts(), { initialValue: [] as Product[] });
+
+  // ✅ 3. Computed signal que recalcula automáticamente el producto actual
+  product = computed(() => {
+    const productId = +this.id();
+    const products = this.products();
+    return products.find(p => p.id === productId);
+  });
+
+
+  // ✅ 4. (Opcional) efecto para depuración o lógica adicional
+  constructorDebug = effect(() => {
+    console.log('Producto seleccionado:', this.product());
+  });
   addItemToCart() {
     // Ahora leemos el valor del signal con product()
     const currentProduct = this.product();
