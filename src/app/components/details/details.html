@@ -9,11 +9,11 @@
   @if (product(); as productItem) {
     
     <div class="row">
-      <div class="col-md-3 m-auto">
+      <div class="col-md-5 m-auto">
         <img [src]="productItem.imageUrl" class="img-fluid rounded shadow-lg" [alt]="productItem.name" style="object-fit: cover;">
       </div>
       <div class="col-md-6 d-flex flex-column justify-content-center">
-        <h1 class="display-4">{{ productItem.name }}</h1>
+        <h1 class="item-name">{{ productItem.name }}</h1>
         <p class="lead description">{{ productItem.description }}</p>
         <p class="price text-white">{{ productItem.price | currency:'CHF' }}</p>
         <div class="mt-4">

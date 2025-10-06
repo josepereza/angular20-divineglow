@@ -14,13 +14,23 @@
     background-color: #198754; /* Color verde de éxito de Bootstrap */
     border-color: #198754;
 }
+img{
+  width: 100%;
+}
 
    @media (max-width: 768px) {
       .description {
         font-size: 0.8rem;
       }
       img{
-        max-width: 80%;
+        width: 100%;
         margin-right:auto;
+      }
+      .item-name{
+        font-size: 1.2em;
+        margin-top: 5px;
+      }
+      .price {
+        font-size: 1.2rem;
       }
     }
