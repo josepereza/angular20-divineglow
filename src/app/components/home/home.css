@@ -63,18 +63,24 @@
   70% { transform: scale(1); box-shadow: 0 0 0 10px rgba(255, 255, 255, 0); }
   100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255, 255, 255, 0); }
 }
-
+.brand-imagen{
+  position: relative;
+}
 
 .brand-name {
-  font-family: 'Brush Script MT', cursive; /* Una fuente elegante, puedes cambiarla */
-  font-size: 3rem;
-  color: #fff;
+  position: absolute;
+  left: 35%;
+  bottom: 40%;
+  font-family: "Great Vibes", cursive;
+  font-size: 2rem;
+  letter-spacing: 0.2em; /* Esto aumentará el espacio entre las letras */
+
+  color: #0a0a0a;
   /* Efecto de sombra para profundidad */
   text-shadow: 
-    0 0 5px #fff, 
-    0 0 10px #fff, 
-    0 0 20px #ff00de, 
-    0 0 30px #ff00de;
+  
+    0 0 20px #fbff0073, 
+    0 0 30px #bee418;
   /* Animación de entrada y brillo */
   animation: fadeInGlow 3s ease-in-out forwards;
   opacity: 0;
@@ -90,8 +96,7 @@
     text-shadow: 
       0 0 8px #fff, 
       0 0 15px #fff, 
-      0 0 25px #ff00de, 
-      0 0 40px #ff00de;
+     
   }
   100% {
     opacity: 1;
@@ -99,8 +104,7 @@
     text-shadow: 
       0 0 5px #fff, 
       0 0 10px #fff, 
-      0 0 20px #ff00de, 
-      0 0 30px #ff00de;
+     
   }
 }
 
@@ -117,7 +121,7 @@
 }
 
 /* Ajustes para móvil */
-@media (min-width: 768px) {
+@media (min-width: 868px) {
   .brand-name {
     font-size: 4.5rem;
   }
