@@ -32,6 +32,7 @@
 
 .hero-content {
   max-width: 80%;  
+  max-height: 80%;
   position: relative;
   z-index: 2;
   padding: 20px;
@@ -46,7 +47,7 @@
 }
 
 .hero-subtitle {
-  font-size: 1.2rem;
+  font-size: 1rem;
   max-width: 600px;
   margin: 1rem auto;
 }
@@ -69,8 +70,8 @@
 
 .brand-name {
   position: absolute;
-  left: 35%;
-  bottom: 40%;
+  left: 25%;
+  bottom: 25%;
   font-family: "Great Vibes", cursive;
   font-size: 2rem;
   letter-spacing: 0.2em; /* Esto aumentará el espacio entre las letras */
