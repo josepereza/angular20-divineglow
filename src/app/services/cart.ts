@@ -1,5 +1,6 @@
 import { computed, Injectable, signal } from '@angular/core';
 import { Product } from '../interfaces/product';
+import { LineaPedido } from '../interfaces/pedido';
 
 @Injectable({
   providedIn: 'root'
@@ -7,6 +8,7 @@ import { Product } from '../interfaces/product';
 export class CartService {
   // Signal para gestionar el estado del carrito
   cartItems = signal<Product[]>([]);
+  cartItemsPedido=signal<LineaPedido[]>([]);
 
   // Signals computados para valores derivados
   totalItems = computed(() => this.cartItems().length);
@@ -14,7 +16,9 @@ export class CartService {
 
   addToCart(product: Product) {
     this.cartItems.update(items => [...items, product]);
-  }
+    this.cartItemsPedido.update(value=>{return [...value,{productoId:product.id,cantidad:1}]}
+    )
+  } 
 
   removeFromCart(productId: number) {
     this.cartItems.update(items => items.filter(item => item.id !== productId));

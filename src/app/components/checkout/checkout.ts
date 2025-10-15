@@ -3,6 +3,8 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { CartService } from '../../services/cart';
 import { Router } from '@angular/router';
 import { NgClass } from '@angular/common';
+import { CreatePedido } from '../../interfaces/pedido';
+import { PedidoService } from '../../services/pedido.service';
 
 @Component({
   selector: 'app-checkout',
@@ -15,14 +17,13 @@ export class Checkout {
   private fb = inject(FormBuilder);
   private cartService = inject(CartService);
   private router = inject(Router);
-
+  pedidoService=inject(PedidoService)
   // Definición del FormGroup para el formulario
   checkoutForm!: FormGroup;
 
   // Signals para gestionar el estado de la UI
   isSubmitting = signal(false);
   submissionStatus = signal<'idle' | 'success' | 'error'>('idle');
-
   ngOnInit(): void {
     // Inicialización del formulario con sus campos y validadores
     this.checkoutForm = this.fb.group({
@@ -40,11 +41,25 @@ export class Checkout {
   }
 
   onSubmit(): void {
+    console.log('cartimesPedido',this.cartService.cartItemsPedido())
     // Si el formulario es inválido, marcamos todos los campos como "tocados" para mostrar los errores
     if (this.checkoutForm.invalid) {
       this.checkoutForm.markAllAsTouched();
       return;
     }
+
+    if (this.checkoutForm.valid && this.cartService.cartItems().length > 0) {
+      const formValue = this.checkoutForm.value;
+
+      // Combinamos street, city y postalCode para formar customerAddress
+      const customerAddress = `${formValue.street}, ${formValue.city} ${formValue.postalCode}`;
+
+      const pedidoData: CreatePedido = {
+        customerName: formValue.fullName, // Mapeamos fullName a customerName
+        customerEmail: formValue.email,   // email mapea directamente
+        customerAddress: customerAddress, // Usamos la dirección combinada
+        lineas: this.cartService.cartItemsPedido()
+      };
 
     // Comienza el proceso de envío
     this.isSubmitting.set(true);
@@ -53,16 +68,26 @@ export class Checkout {
     console.log('Enviando pedido:', this.checkoutForm.value);
 
     // --- Simulación de una llamada a una API ---
-    setTimeout(() => {
-      // Éxito simulado
-      this.submissionStatus.set('success');
+
+
+      this.pedidoService.createPedido(pedidoData).subscribe({
+        next: (response) => {
+          console.log('Pedido creado con éxito:', response);
+          alert('Pedido creado con éxito!');
+this.submissionStatus.set('success');
       this.isSubmitting.set(false);
       this.cartService.clearCart(); // Vaciamos el carrito
-      this.checkoutForm.reset(); // Reseteamos el formulario
+      this.checkoutForm.reset(); // Reseteamos el formulario          this.cartItems = []; // Limpiar carrito
+        },
+        error: (error) => {
+          console.error('Error al crear el pedido:', error);
+          alert('Error al crear el pedido: ' + (error.error?.message || error.message));
+        }
+      }); 
+         
 
-      // Opcional: Redirigir al usuario a una página de agradecimiento después de unos segundos
-      setTimeout(() => this.router.navigate(['/']), 3000);
+    
+  }
 
-    }, 2000);
   }
 }
