@@ -15,13 +15,19 @@ export class CartService {
   totalPrice = computed(() => this.cartItems().reduce((acc, item) => acc + item.price, 0));
 
   addToCart(product: Product) {
-    this.cartItems.update(items => [...items, product]);
+     const normalizedProduct = {
+    ...product,
+    price: Number(product.price), // fuerza conversión a número
+  };
+    this.cartItems.update(items => [...items, normalizedProduct]);
     this.cartItemsPedido.update(value=>{return [...value,{productoId:product.id,cantidad:1}]}
     )
   } 
 
   removeFromCart(productId: number) {
     this.cartItems.update(items => items.filter(item => item.id !== productId));
+    this.cartItemsPedido.update(items => items.filter(item => item.productoId !== productId));
+
   }
 
    // NUEVO MÉTODO

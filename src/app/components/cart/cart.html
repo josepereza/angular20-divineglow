@@ -34,7 +34,7 @@
             <ul class="list-group list-group-flush">
               <li class="list-group-item d-flex justify-content-between align-items-center">
                 Artikel ({{ cartService.totalItems() }})
-                <span>{{ cartService.totalPrice() | currency:'CHF' }}</span>
+                <span>{{ cartService.totalPrice() | number:'1.2-2' | currency:'CHF' }}</span>
               </li>
               <li class="list-group-item d-flex justify-content-between align-items-center fw-bold">
                 Gesamtsumme
