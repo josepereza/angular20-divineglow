@@ -5,17 +5,21 @@ import { HttpClient, httpResource } from '@angular/common/http';
 import { Product } from '../../../interfaces/product';
 import { DecimalPipe, NgIf } from '@angular/common';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
+import { AuthService } from '../../services/auth-service';
 
 @Component({
   selector: 'product-list-admin',
-  imports: [ReactiveFormsModule,NgIf],
+  imports: [ReactiveFormsModule, NgIf],
   templateUrl: './product-list-admin.html',
-  styleUrl: './product-list-admin.css'
+  styleUrl: './product-list-admin.css',
 })
 export class ProductListAdmin {
   private service = inject(ProductServiceAdmin);
   private fb = inject(FormBuilder);
+  private auth = inject(AuthService);
+  private router = inject(Router);
+
 
   products = this.service.products;
   showModal = signal(false);
@@ -27,7 +31,7 @@ export class ProductListAdmin {
     description: ['', Validators.required],
     price: [0, Validators.required],
     imageUrl: [''],
-    stock: [0, Validators.required]
+    stock: [0, Validators.required],
   });
 
   editMode = computed(() => !!this.selectedProduct());
@@ -76,4 +80,8 @@ export class ProductListAdmin {
     if (!file) return;
     this.form.get('imageUrl')?.setValue('/' + file.name);
   }
+  logout() {
+  this.auth.logout();
+  this.router.navigate(['/login']); // vuelve a la página de login
+}
 }

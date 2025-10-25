@@ -1,15 +1,23 @@
-<div class="container mt-4">
-<br><br>
-<br>
+<div class="container botones">
 
+  <!-- BOTÓN AGREGAR -->
   <button class="btn btn-info mb-3" (click)="openAddModal()">
-    ➕ Agregar Producto
+    ➕ Produkt hinzufügen
   </button>
 
-  <!-- PRODUCT LIST -->
-  <div class="row">
+  <!-- BOTÓN LOGOUT -->
+  <button class="btn btn-danger mb-3 ms-3" (click)="logout()">
+    🔒 Abmelden
+  </button>
+  <br>
+
+</div>
+<div class="container mt-4">
+
+  <!-- LISTADO DE PRODUCTOS -->
+<div class="row row-cols-1 row-cols-md-3 g-4">
     @for(product of products(); track product.id) {
-      <div class="col-sm-6 col-md-4 col-lg-3 mb-4">
+      <div class="col">
         <div class="card bg-dark text-white shadow border-secondary h-100">
 
           <img [src]="product.imageUrl" class="card-img-top"
@@ -17,15 +25,15 @@
 
           <div class="card-body d-flex flex-column">
             <h5 class="text-info">{{ product.name }}</h5>
-            <p class="text-warning small">Stock: {{ product.stock }}</p>
+            <p class="text-warning small">Lagerbestand: {{ product.stock }}</p>
             <p class="small">{{ product.description }}</p>
             <p class="fw-bold text-success mt-auto">€ {{ product.price }}</p>
 
             <div class="gap-2 d-flex mt-3">
               <button class="btn btn-warning btn-sm w-50"
-                      (click)="openEditModal(product)">Editar</button>
+                      (click)="openEditModal(product)">Bearbeiten</button>
               <button class="btn btn-danger btn-sm w-50"
-                      (click)="deleteProduct(product.id)">Eliminar</button>
+                      (click)="deleteProduct(product.id)">Löschen</button>
             </div>
 
           </div>
@@ -35,8 +43,7 @@
   </div>
 </div>
 
-
-<!-- MODAL FORM -->
+<!-- MODAL FORMULARIO -->
 <div class="modal fade show"
      tabindex="-1"
      style="display: block;"
@@ -46,7 +53,7 @@
 
       <div class="modal-header">
         <h5 class="modal-title text-info">
-          {{ editMode() ? '✏️ Editar Producto' : '🆕 Nuevo Producto' }}
+          {{ editMode() ? '✏️ Produkt bearbeiten' : '🆕 Neues Produkt hinzufügen' }}
         </h5>
         <button type="button" class="btn-close btn-close-white"
                 (click)="closeModal()"></button>
@@ -58,34 +65,34 @@
           <input type="hidden" formControlName="id" />
 
           <div class="col-12">
-            <label class="form-label">Nombre</label>
+            <label class="form-label">Name</label>
             <input formControlName="name"
                    class="form-control bg-secondary text-white" />
           </div>
 
           <div class="col-12">
-            <label class="form-label">Descripción</label>
+            <label class="form-label">Beschreibung</label>
             <textarea formControlName="description"
                       rows="2"
                       class="form-control bg-secondary text-white"></textarea>
           </div>
 
           <div class="col-md-6">
-            <label class="form-label">Precio</label>
+            <label class="form-label">Preis</label>
             <input type="number"
                    formControlName="price"
                    class="form-control bg-secondary text-white" />
           </div>
 
           <div class="col-md-6">
-            <label class="form-label">Stock</label>
+            <label class="form-label">Lagerbestand</label>
             <input type="number"
                    formControlName="stock"
                    class="form-control bg-secondary text-white" />
           </div>
 
           <div class="col-12">
-            <label class="form-label">Imagen</label>
+            <label class="form-label">Bild</label>
             <input type="file"
                    class="form-control bg-secondary text-white"
                    (change)="onFileChange($event)" />
@@ -95,8 +102,8 @@
       </div>
 
       <div class="modal-footer">
-        <button class="btn btn-secondary" (click)="closeModal()">Cancelar</button>
-        <button class="btn btn-info" (click)="saveProduct()">Guardar</button>
+        <button class="btn btn-secondary" (click)="closeModal()">Abbrechen</button>
+        <button class="btn btn-info" (click)="saveProduct()">Speichern</button>
       </div>
 
     </div>
