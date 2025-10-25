@@ -1,7 +1,7 @@
 import { Component, computed, effect, inject, input, signal } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { CartService } from '../../services/cart';
-import { ProductoService } from '../../services/product';
+import { ProductoService } from '../../services/productService';
 import { Product } from '../../interfaces/product';
 import { CommonModule, CurrencyPipe } from '@angular/common';
 import { map, switchMap } from 'rxjs';

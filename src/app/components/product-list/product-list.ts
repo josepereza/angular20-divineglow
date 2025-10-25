@@ -1,5 +1,5 @@
 import { Component, computed, inject } from '@angular/core';
-import { ProductoService } from '../../services/product';
+import { ProductoService } from '../../services/productService';
 import { RouterLink } from '@angular/router';
 import { CurrencyPipe } from '@angular/common';
 

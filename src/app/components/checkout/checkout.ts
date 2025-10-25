@@ -4,7 +4,7 @@ import { CartService } from '../../services/cart';
 import { Router } from '@angular/router';
 import { NgClass } from '@angular/common';
 import { CreatePedido } from '../../interfaces/pedido';
-import { PedidoService } from '../../services/pedido.service';
+import { PedidoService } from '../../services/pedidoService';
 
 @Component({
   selector: 'app-checkout',
