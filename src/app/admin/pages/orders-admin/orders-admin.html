@@ -1,7 +1,8 @@
 <div class="container mt-4">
   <br /><br /><br />
   <a class="btn btn-primary btn-sm mt-2" routerLink="/admin">🔙 zurückkommen</a>
-  <br>  <br>
+  <br />
+  <br />
 
   <h2 class="text-white">📦 Administración de Pedidos</h2>
 
@@ -21,7 +22,9 @@
       ✅ Als gesendet markieren
     </button>
     <!-- ✅ Nuevo botón -->
-    <button class="btn btn-info btn-sm p-2 mt-1" (click)="viewLines(order)">📄 Positionen anzeigen</button>
+    <button class="btn btn-info btn-sm p-2 mt-1" (click)="viewLines(order)">
+      📄 Positionen anzeigen
+    </button>
   </div>
   }
 </div>
@@ -42,14 +45,19 @@
           <thead>
             <tr>
               <th>Producto ID</th>
-              <th>Cantidad</th>
+              <th>Name</th>
+              <th>Menge</th>
+              <th>Price</th>
+              t
             </tr>
           </thead>
           <tbody>
             @for(line of selectedOrder()?.lineas; track line.id) {
             <tr>
               <td>{{ line.productoId }}</td>
+              <td>{{ line.producto.name }}</td>
               <td>{{ line.cantidad }}</td>
+              <td>{{ line.producto.price }}</td>
             </tr>
             }
           </tbody>
