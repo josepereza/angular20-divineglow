@@ -14,14 +14,14 @@
     @if(order.gesendet) {
     <span class="badge bg-success">✅ Enviado</span>
     } @else {
-    <span class="badge bg-warning text-dark">⏳ Pendiente</span>
+    <span class="badge bg-warning text-dark">⏳ Offen • Noch nicht gesendet</span>
     }
 
     <button class="btn btn-primary btn-sm mt-2" (click)="toggleGesendet(order)">
-      ✅ Marcar como Enviado
+      ✅ Als gesendet markieren
     </button>
     <!-- ✅ Nuevo botón -->
-    <button class="btn btn-info btn-sm" (click)="viewLines(order)">📄 Ver líneas</button>
+    <button class="btn btn-info btn-sm" (click)="viewLines(order)">📄 Positionen anzeigen</button>
   </div>
   }
 </div>
@@ -32,7 +32,7 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title">📝 Detalle del Pedido #{{ selectedOrder()?.id }}</h5>
+        <h5 class="modal-title">📝 Bestelldetails #{{ selectedOrder()?.id }}</h5>
         <button type="button" class="btn-close" (click)="showLinesModal.set(false)"></button>
       </div>
 
