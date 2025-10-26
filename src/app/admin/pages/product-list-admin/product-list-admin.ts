@@ -10,7 +10,7 @@ import { AuthService } from '../../services/auth-service';
 
 @Component({
   selector: 'product-list-admin',
-  imports: [ReactiveFormsModule, NgIf],
+  imports: [ReactiveFormsModule, NgIf, RouterLink],
   templateUrl: './product-list-admin.html',
   styleUrl: './product-list-admin.css',
 })

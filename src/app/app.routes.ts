@@ -9,12 +9,16 @@ import { ProductListAdmin } from './admin/pages/product-list-admin/product-list-
 import { ProductFormComponent } from './admin/pages/product-form/product-form';
 import { authGuard } from './admin/guards/auth-guard';
 import { Login } from './admin/pages/login/login';
+import { OrdersAdminComponent } from './admin/pages/orders-admin/orders-admin';
 
 export const routes: Routes = [
   { path: '', component: Home },
   { path: 'admin', component: ProductListAdmin,canActivate: [authGuard]  },
   {
     path: 'formAdmin/:id',component: ProductFormComponent,canActivate: [authGuard] 
+  },
+  {
+    path: 'pedidos', component: OrdersAdminComponent
   },
   {path:'login', component:Login},
   { path: 'products', component: ProductList },

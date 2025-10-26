@@ -1,0 +1,64 @@
+<div class="container mt-4">
+  <br /><br /><br />
+  <a class="btn btn-primary btn-sm mt-2" routerLink="/admin">🔙 zurückkommen</a>
+  <br>  <br>
+
+  <h2 class="text-white">📦 Administración de Pedidos</h2>
+
+  @for(order of orders(); track order.id) {
+  <div class="card mb-2 p-3">
+    <p>🧑 Cliente: {{ order.customerName }}</p>
+    <p>📅 Fecha: {{ order.createdAt }}</p>
+    <p>💶 Total: {{ order.totalAmount }} €</p>
+
+    @if(order.gesendet) {
+    <span class="badge bg-success">✅ Enviado</span>
+    } @else {
+    <span class="badge bg-warning text-dark">⏳ Pendiente</span>
+    }
+
+    <button class="btn btn-primary btn-sm mt-2" (click)="toggleGesendet(order)">
+      ✅ Marcar como Enviado
+    </button>
+    <!-- ✅ Nuevo botón -->
+    <button class="btn btn-info btn-sm" (click)="viewLines(order)">📄 Ver líneas</button>
+  </div>
+  }
+</div>
+
+@if(showLinesModal()) {
+<div class="modal-backdrop fade show"></div>
+<div class="modal d-block fade show">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">📝 Detalle del Pedido #{{ selectedOrder()?.id }}</h5>
+        <button type="button" class="btn-close" (click)="showLinesModal.set(false)"></button>
+      </div>
+
+      <div class="modal-body">
+        @if(selectedOrder()?.lineas?.length) {
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Producto ID</th>
+              <th>Cantidad</th>
+            </tr>
+          </thead>
+          <tbody>
+            @for(line of selectedOrder()?.lineas; track line.id) {
+            <tr>
+              <td>{{ line.productoId }}</td>
+              <td>{{ line.cantidad }}</td>
+            </tr>
+            }
+          </tbody>
+        </table>
+        } @else {
+        <p>No hay líneas en este pedido.</p>
+        }
+      </div>
+    </div>
+  </div>
+</div>
+}
