@@ -55,9 +55,9 @@
             @for(line of selectedOrder()?.lineas; track line.id) {
             <tr>
               <td>{{ line.productoId }}</td>
-              <td>{{ line.producto.name }}</td>
+              <td>{{ line.producto?.name }}</td>
               <td>{{ line.cantidad }}</td>
-              <td>{{ line.producto.price }}</td>
+              <td>{{ line.producto?.price }}</td>
             </tr>
             }
           </tbody>
