@@ -36,3 +36,7 @@ input.form-control,
 textarea.form-control {
   border: 1px solid #444;
 }
+
+html, body, app-root { height: 100%; margin: 0; }
+app-root { display:flex; flex-direction:column; min-height:100vh; }
+main.app-main { flex:1 1 auto; }

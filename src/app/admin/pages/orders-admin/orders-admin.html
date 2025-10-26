@@ -12,16 +12,16 @@
     <p>💶 Total: {{ order.totalAmount }} €</p>
 
     @if(order.gesendet) {
-    <span class="badge bg-success">✅ Enviado</span>
+    <span class="badge bg-success">✅ gesendet</span>
     } @else {
     <span class="badge bg-warning text-dark">⏳ Offen • Noch nicht gesendet</span>
     }
 
-    <button class="btn btn-primary btn-sm mt-2" (click)="toggleGesendet(order)">
+    <button class="btn btn-primary btn-sm mt-2 p-2" (click)="toggleGesendet(order)">
       ✅ Als gesendet markieren
     </button>
     <!-- ✅ Nuevo botón -->
-    <button class="btn btn-info btn-sm" (click)="viewLines(order)">📄 Positionen anzeigen</button>
+    <button class="btn btn-info btn-sm p-2 mt-1" (click)="viewLines(order)">📄 Positionen anzeigen</button>
   </div>
   }
 </div>

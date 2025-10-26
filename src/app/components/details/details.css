@@ -29,7 +29,9 @@
 img{
   width: 100%;
 }
-
+.detalles{
+  height: 100vh;
+}
    @media (max-width: 768px) {
       .description {
         font-size: 0.8rem;
