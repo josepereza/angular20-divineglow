@@ -1,12 +1,49 @@
 <div class="container mt-4">
   <br /><br /><br />
   <a class="btn btn-primary btn-sm mt-2" routerLink="/admin">🔙 zurückkommen</a>
+  <div class="filtros mb-3">
+  <button
+    class="btn me-2"
+    [class.btn-primary]="filtro() === 'alle'"
+    [class.btn-outline-primary]="filtro() !== 'alle'"
+    (click)="setFiltro('alle')">
+    Alle
+  </button>
+
+  <button
+    class="btn me-2"
+    [class.btn-warning]="filtro() === 'offen'"
+    [class.btn-outline-warning]="filtro() !== 'offen'"
+    (click)="setFiltro('offen')">
+    Offen
+  </button>
+
+  <button
+    class="btn"
+    [class.btn-success]="filtro() === 'gesendet'"
+    [class.btn-outline-success]="filtro() !== 'gesendet'"
+    (click)="setFiltro('gesendet')">
+    Gesendet
+  </button>
+</div>
+
+<!-- 🧠 Ahora usamos ordersFiltrados() -->
+<!-- @for(order of ordersFiltrados(); track order.id) {
+  <div class="order-card mb-3 p-3 border rounded">
+    <strong>#{{ order.id }}</strong> — {{ order.customerName }}
+    <span class="badge ms-2" [class.bg-success]="order.gesendet" [class.bg-warning]="!order.gesendet">
+      {{ order.gesendet ? 'Gesendet ✅' : 'Offen ⏳' }}
+    </span>
+  </div>
+} -->
+
   <br />
   <br />
 
   <h2 class="text-white">📦 Administración de Pedidos</h2>
 
-  @for(order of orders(); track order.id) {
+  @for(order of ordersFiltrados(); track order.id) {
+   
   <div class="card mb-2 p-3">
     <p>🧑 Cliente: {{ order.customerName }}</p>
     <p>📅 Fecha: {{ order.createdAt }}</p>
@@ -26,7 +63,8 @@
       📄 Positionen anzeigen
     </button>
   </div>
-  }
+  
+}
 </div>
 
 @if(showLinesModal()) {
